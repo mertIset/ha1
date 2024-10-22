@@ -95,14 +95,11 @@ class CalculatorTest {
     void testClearKey() {
         Calculator calc = new Calculator();
 
-        // Eingabe einer mehrstelligen Zahl
         calc.pressDigitKey(5);
         calc.pressDigitKey(4);
 
-        // Drücken der Clear-Taste (CE)
         calc.pressClearKey();
 
-        // Überprüfen, dass der Bildschirm nach dem Drücken der Clear-Taste auf "0" gesetzt wurde
         String expected = "0";
         String actual = calc.readScreen();
 
