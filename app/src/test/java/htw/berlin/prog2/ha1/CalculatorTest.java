@@ -106,5 +106,30 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should not allow more than 10 digits on the screen")
+    void testMaxDigitsLimit() {
+        Calculator calc = new Calculator();
+
+        // 11 Ziffern eingeben
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(3);
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(5);
+        calc.pressDigitKey(6);
+        calc.pressDigitKey(7);
+        calc.pressDigitKey(8);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(1); // Überschreitung der 10 Ziffern
+
+        // Der Bildschirm sollte maximal 10 Ziffern anzeigen, die letzte Ziffer sollte ignoriert werden
+        String expected = "1234567890";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
