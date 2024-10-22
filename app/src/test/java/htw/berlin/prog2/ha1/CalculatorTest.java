@@ -91,7 +91,7 @@ class CalculatorTest {
 
     //TODO hier weitere Tests erstellen
     @Test
-    @DisplayName("should reset only the screen when clear key is pressed")
+    @DisplayName("should reset the screen when clear key is pressed")
     void testClearKey() {
         Calculator calc = new Calculator();
 
