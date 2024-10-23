@@ -29,9 +29,17 @@ public class Calculator {
      * @param digit Die Ziffer, deren Taste gedrückt wurde
      */
     public void pressDigitKey(int digit) {
-        if(digit > 9 || digit < 0) throw new IllegalArgumentException();
+        if (digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) {
+            screen = "";
+        }
+
+        // Prüfen, ob bereits 10 Ziffern ohne Dezimalpunkt vorhanden sind
+        int digitCount = screen.replace(".", "").length();
+        if (digitCount >= 10) {
+            return; // Weitere Ziffern werden ignoriert
+        }
 
         screen = screen + digit;
     }
