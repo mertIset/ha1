@@ -131,5 +131,22 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should not throw an error when equals is pressed without an operation")
+    void testEqualsWithoutOperation() {
+        Calculator calc = new Calculator();
+
+        // Nur eine Zahl eingeben, aber keine Operation
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+
+        // Der Bildschirm sollte unverändert bleiben
+        String expected = "5";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 }
 
