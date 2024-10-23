@@ -118,16 +118,49 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
-        var result = switch(latestOperation) {
-            case "+" -> latestValue + Double.parseDouble(screen);
-            case "-" -> latestValue - Double.parseDouble(screen);
-            case "x" -> latestValue * Double.parseDouble(screen);
-            case "/" -> latestValue / Double.parseDouble(screen);
-            default -> throw new IllegalArgumentException();
-        };
+        // Prüfen, ob eine Operation durchgeführt werden soll
+        if (latestOperation.isEmpty()) {
+            return; // Keine Operation festgelegt, nichts tun
+        }
+
+        double result = 0; // Initialisiere das Ergebnis
+
+        switch(latestOperation) {
+            case "+":
+                result = latestValue + Double.parseDouble(screen);
+                break;
+            case "-":
+                result = latestValue - Double.parseDouble(screen);
+                break;
+            case "x":
+                result = latestValue * Double.parseDouble(screen);
+                break;
+            case "/":
+                if (Double.parseDouble(screen) == 0) {
+                    screen = "Error"; // Division durch Null
+                    return;
+                } else {
+                    result = latestValue / Double.parseDouble(screen);
+                }
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+
         screen = Double.toString(result);
-        if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+        if (screen.equals("Infinity")) {
+            screen = "Error"; // Division durch Null
+        }
+
+        // Entfernen des Dezimalpunkts bei Ganzzahlen
+        if (screen.endsWith(".0")) {
+            screen = screen.substring(0, screen.length() - 2);
+        }
+
+        // Beschränkung der maximalen Länge der Anzeige
+        if (screen.contains(".") && screen.length() > 11) {
+            screen = screen.substring(0, 10);
+        }
     }
 }
