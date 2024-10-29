@@ -131,7 +131,7 @@ public class Calculator {
             return; // Keine Operation festgelegt, nichts tun
         }
 
-        double result = 0; // Initialisiere das Ergebnis
+        double result; // Initialisiere das Ergebnis
 
         switch(latestOperation) {
             case "+":
